@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         CrittersSquared
 // @namespace    https://discord.gg/dY4gjw8
-// @version      0.2
+// @version      0.3
 // @description  A bunch of box critters mod put into one extension.
 // @author       joshhies
 // @match        https://boxcritters.com/play/index.html
@@ -38,23 +38,32 @@ window.addEventListener('load', function() {
 
     // Sets the theme to dark if browser supports webstorage
 
-    var chatBar = document.getElementsByClassName("input-group")[0];
+    var chatBar = document.getElementsByClassName("container")[0];
+    var chatBar2 = document.getElementsByClassName("input-group")[0];
     var chatBox = document.getElementsByClassName("row justify-content-center")[1];
-    var jokeBtnHTML = `<span class="input-group-btn"><button id="jokebtn" class="btn btn-success">Joke</button></span>`;
-    var clapBtnHTML = `<span class="input-group-btn"><button id="clapbtn" class="btn btn-warning">Clap</button></span>`;
-    var balloonoffBtnHTML = `<span class="input-group-btn"><button id="balloonoffbtn" class="btn btn-info">Chat Balloons On/Off</button></span>`;
-    var nametagsonoffBtnHTML = `<span class="input-group-btn"><button id="nametagsonoffbtn" class="btn btn-info">Name Tags On/Off</button></span>`;
-    var darkmodeBtnHTML = `<span class="input-group-btn"><button id="darkmodebtn" class="btn btn-danger">Darkmode On/Off</button></span>`;
-    var tavernBtnHTML = `<span class="input-group-btn"><button id="tavernbtn" class="btn btn-danger">Join Tavern</button></span>`;
-    var bridgeBtnHTML = `<span class="input-group-btn"><button id="bridgebtn" class="btn btn-danger">Join Bridge</button></span>`;
-    chatBar.insertAdjacentHTML('beforeend', `<br />`);
-    chatBar.insertAdjacentHTML('beforeend', jokeBtnHTML);
-    chatBar.insertAdjacentHTML('beforeend', clapBtnHTML);
+    var jokeBtnHTML = `<span class="input-group-btn"><button id="jokebtn" class="btn btn-success" style="display: block;max-width: 300px;margin: auto;">Joke</button></span>`;
+    var clapBtnHTML = `<span class="input-group-btn"><button id="clapbtn" class="btn btn-warning " style="display: block;max-width: 300px;margin: auto;" >Clap</button></span>`;
+    var balloonoffBtnHTML = `<span class="input-group-btn"><button id="balloonoffbtn" class="btn btn-info" style="display: block;max-width: 300px;margin: auto;" >Chat Balloons On/Off</button></span>`;
+    var nametagsonoffBtnHTML = `<span class="input-group-btn"><button id="nametagsonoffbtn" class="btn btn-info" style="display: block;max-width: 300px;margin: auto;" >Name Tags On/Off</button></span>`;
+    var darkmodeBtnHTML = `<span class="input-group-btn"><button id="darkmodebtn" class="btn btn-info" style="display: block;max-width: 300px;margin: auto;" >Darkmode On/Off</button></span>`;
+    var tavernBtnHTML = `<span class="input-group-btn"><button id="tavernbtn" class="btn btn-primary"style="display: block;max-width: 300px;margin: auto;" >Join Tavern</button></span>`;
+    var bridgeBtnHTML = `<span class="input-group-btn"><button id="bridgebtn" class="btn btn-primary" style="display: block;max-width: 300px;margin: auto;" >Join Bridge</button></span>`;
+    var freeitemBtnHTML = `<span class="input-group-btn"><button id="freeitembtn" class="btn btn-danger" style="display: block;max-width: 300px;margin: auto;">Collect the current free item</button></span>`;
+
+    chatBar2.insertAdjacentHTML('beforeend', jokeBtnHTML);
+    chatBar2.insertAdjacentHTML('beforeend', clapBtnHTML);
+    chatBar.insertAdjacentHTML('afterend', `<br\>`);
     chatBar.insertAdjacentHTML('afterend', balloonoffBtnHTML);
     chatBar.insertAdjacentHTML('afterend', nametagsonoffBtnHTML);
+
     chatBar.insertAdjacentHTML('afterend', darkmodeBtnHTML);
+
+    chatBar.insertAdjacentHTML('afterend', `<br\>`);
+
     chatBar.insertAdjacentHTML('afterend', tavernBtnHTML);
     chatBar.insertAdjacentHTML('afterend', bridgeBtnHTML);
+    chatBar.insertAdjacentHTML('afterend', `<br\>`);
+    chatBar.insertAdjacentHTML('afterend', freeitemBtnHTML);
 
 
 
@@ -101,6 +110,10 @@ window.addEventListener('load', function() {
         document.getElementById("inputMessage").value="";
         world.sendMessage("/join bridge");
     }
+    function freeitem() {
+        document.getElementById("inputMessage").value="";
+        world.sendMessage("/freeitem"); // Redeems Free Item Of The Week
+    }
 
 
 
@@ -136,6 +149,10 @@ window.addEventListener('load', function() {
     var joinbridgeBtn = document.querySelector ("#bridgebtn");
     if (joinbridgeBtn) {
         joinbridgeBtn.addEventListener ("click", joinbridge, false);
+    }
+    var freeitemBtn = document.querySelector ("#freeitembtn");
+    if (freeitemBtn) {
+        freeitemBtn.addEventListener ("click", freeitem, false);
     }
 
 }, true);
